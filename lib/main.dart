@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gsheets_flutter/api/sheets/user_sheets_api.dart';
-import 'package:gsheets_flutter/model/user.dart';
+import 'package:gsheets_flutter/model/api/sheets/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,11 +59,18 @@ class _HomePageState extends State<HomePage> {
 
   Future insertUsers() async {
     final users = [
-      const User(id: 1, name: 'a', email: 'a@gmail.com', isBeginner: true),
-      const User(id: 2, name: 'b', email: 'b@gmail.com', isBeginner: true),
-      const User(id: 3, name: 'c', email: 'c@gmail.com', isBeginner: false),
-      const User(id: 4, name: 'd', email: 'd@gmail.com', isBeginner: false),
-      const User(id: 5, name: 'e', email: 'e@gmail.com', isBeginner: true),
+      User(
+          id: 1,
+          cpf: '123.123.123-66',
+          name: 'a',
+          email: 'a@gmail.com',
+          district: 'guamá',
+          post: 'posto 1',
+          animalName: 'bolinha',
+          animalSex: 'macho',
+          animalSpecies: 'cachorro',
+          animalOld: 'adulto',
+          dataVaccination: DateTime.now()),
     ];
 
     final usersJson = users.map((user) => user.toJson()).toList();
