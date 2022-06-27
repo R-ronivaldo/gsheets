@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gsheets_flutter/api/sheets/user_sheets_api.dart';
 import 'package:gsheets_flutter/model/api/sheets/user.dart';
+import 'package:uuid/uuid.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +50,31 @@ class _HomePageState extends State<HomePage> {
           ),
           TextButton(
               onPressed: () async {
-                insertUsers();
+                //insertUsers();
+
+                /*User? user = await UserSheetsApi.getById(
+                    "6ffab871-be06-469e-9f79-6777b27396e0");
+                if (user != null) {
+                  print(user.toJson());
+                  User newUser = User(
+                      id: user.id,
+                      cpf: user.cpf,
+                      name: "Novo Nome Teste F",
+                      email: user.email,
+                      district: user.district,
+                      post: user.post,
+                      animalName: user.animalName,
+                      animalSex: user.animalSex,
+                      animalSpecies: user.animalSpecies,
+                      animalOld: user.animalOld,
+                      dataVaccination: user.dataVaccination);
+                  bool test =
+                      await UserSheetsApi.update(user.id!, newUser.toJson());
+                  print(test);
+                }*/
+
+                /*bool test = await UserSheetsApi.deleteById(
+                    "98d75c69-dd25-42f4-a27d-6b9f5e5296e4");*/
               },
               child: const Text("SAVE"))
         ],
@@ -60,7 +85,7 @@ class _HomePageState extends State<HomePage> {
   Future insertUsers() async {
     final users = [
       User(
-          id: 1,
+          id: const Uuid().v4(),
           cpf: '123.123.123-66',
           name: 'a',
           email: 'a@gmail.com',

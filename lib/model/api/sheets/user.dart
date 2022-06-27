@@ -27,7 +27,7 @@ class UserFields {
 }
 
 class User {
-  final int? id;
+  final String? id;
   final String cpf;
   final String name;
   final String email;
@@ -51,6 +51,19 @@ class User {
       required this.animalSpecies,
       required this.animalOld,
       required this.dataVaccination});
+
+  static User fromJson(Map<String, dynamic> json) => User(
+      id: json[UserFields.id],
+      cpf: json[UserFields.cpf],
+      name: json[UserFields.name],
+      email: json[UserFields.email],
+      district: json[UserFields.district],
+      post: json[UserFields.post],
+      animalName: json[UserFields.animalName],
+      animalSex: json[UserFields.animalSex],
+      animalSpecies: json[UserFields.animalSpecies],
+      animalOld: json[UserFields.animalOld],
+      dataVaccination: DateTime.parse(json[UserFields.dataVaccination]));
 
   Map<String, dynamic> toJson() => {
         UserFields.id: id,

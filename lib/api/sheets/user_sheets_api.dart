@@ -50,9 +50,39 @@ class UserSheetsApi {
     return lastRow == null ? 0 : int.tryParse(lastRow.first) ?? 0;
   }
 
+  static Future<User?> getById(String id) async {
+    if (_userSheet == null) return null;
+
+    final json = await _userSheet!.values.map.rowByKey(id, fromColumn: 1);
+    return json == null ? null : User.fromJson(json);
+  }
+
   static Future insert(List<Map<String, dynamic>> rowList) async {
     if (_userSheet == null) return;
 
     _userSheet!.values.map.appendRows(rowList);
+  }
+
+  static Future<bool> update(String id, Map<String, dynamic> user) async {
+    if (_userSheet == null) return false;
+
+    return _userSheet!.values.map.insertRowByKey(id, user);
+  }
+
+  static Future<bool> updateCell(
+      {required String id, required String key, required String value}) async {
+    if (_userSheet == null) return false;
+
+    return _userSheet!.values
+        .insertValueByKeys(value, columnKey: key, rowKey: id);
+  }
+
+  static Future<bool> deleteById(String id) async {
+    if (_userSheet == null) return false;
+
+    final index = await _userSheet!.values.rowIndexOf(id);
+    if (index == -1) return false;
+
+    return _userSheet!.deleteRow(index);
   }
 }
